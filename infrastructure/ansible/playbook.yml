@@ -1,0 +1,44 @@
+---
+- name: Setup EC2 instances for MLOps
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Update apt package cache
+      apt:
+        update_cache: yes
+
+
+    - name: Check Python version
+      command: python3 --version
+      register: python_version
+
+    - name: Ensure  pip are installed
+      apt:
+        name:
+          - python3-pip
+        state: present
+
+    - name: Ensure Docker is installed
+      apt:
+        name: docker.io
+        state: present
+        
+    - debug:
+        var: python_version.stdout
+
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Ensure Docker is working
+      command: docker --version
+
+    - name: Check if mlflow is installed
+      command: which mlflow
+      register: mlflow_check
+      changed_when: false
+      failed_when: false

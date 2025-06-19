@@ -1,0 +1,14 @@
+# OpenTofu/Terraform files
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+crash.log
+terraform.rc
+override.tf
+override.tf.json
+*.tfvars.json
+secrets.tfvars
+# Sensitive credentials directory
+_credentials/
+_credentials/labuser.pem
