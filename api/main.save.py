@@ -20,7 +20,7 @@ def predict(req: Req):
     global model
     if model is None:
         try:
-            mlflow.set_tracking_uri("http://localhost:5001")
+            mlflow.set_tracking_uri("http://localhost:5000")
             model = mlflow.pyfunc.load_model("runs://model")
         except Exception as err:
             raise HTTPException(status_code=500, detail=f"off {err}")
